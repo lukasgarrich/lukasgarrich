@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lukas Garrido Hinrichsen — Pianista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #F5F2ED;
+    --black: #0A0A0A;
+    --charcoal: #1A1A1A;
+    --mid: #5A5A5A;
+    --light: #9A9A9A;
+    --accent: #C8A96E;
+    --accent-light: #E8D5B0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+
+  /* ─── LANG SWITCHER ─── */
+  .lang-switcher {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-left: 32px;
+  }
+  .lang-btn {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 2px;
+    color: rgba(245,242,237,0.6);
+    transition: color 0.3s, background 0.3s;
+    font-family: 'Montserrat', sans-serif;
+  }
+  nav.scrolled .lang-btn { color: var(--mid); }
+  .lang-btn.active,
+  .lang-btn:hover {
+    color: var(--accent) !important;
+    background: rgba(200,169,110,0.08);
+  }
+  .lang-sep {
+    color: rgba(245,242,237,0.25);
+    font-size: 0.6rem;
+  }
+  nav.scrolled .lang-sep { color: rgba(0,0,0,0.2); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 60px;
+    mix-blend-mode: normal;
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(245,242,237,0.95);
+    backdrop-filter: blur(8px);
+    padding: 18px 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+  nav.scrolled .nav-logo { color: var(--black); }
+  .nav-logo svg .st0,.nav-logo svg .st1,.nav-logo svg .st2,.nav-logo svg .st3,.nav-logo svg .st4 { transition: fill 0.4s; }
+  nav.scrolled .nav-logo svg .st0,nav.scrolled .nav-logo svg .st1,nav.scrolled .nav-logo svg .st2,nav.scrolled .nav-logo svg .st3,nav.scrolled .nav-logo svg .st4 { fill: var(--black); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7188rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.85);
+    text-decoration: none;
+    transition: color 0.3s, opacity 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--black); }
+  .nav-links a:hover { color: var(--accent) !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.6) 60%, rgba(10,10,10,0.92) 100%),
+      url("img/hero.jpg") center/cover no-repeat;
+    background-size: cover;
+    background-position: center 20%;
+    transform: scale(1.05);
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1.0); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .hero-text { max-width: 600px; }
+  .hero-eyebrow {
+    font-size: 0.6563rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    animation: fadeUp 1s 0.3s both;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--cream);
+    animation: fadeUp 1s 0.5s both;
+  }
+  .hero-name em {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent-light);
+  }
+  .hero-sub {
+    font-size: 0.7188rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.5);
+    margin-top: 24px;
+    animation: fadeUp 1s 0.7s both;
+  }
+  .hero-right {
+    text-align: right;
+    animation: fadeUp 1s 0.9s both;
+  }
+  .hero-scroll {
+    font-size: 0.6563rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    font-size: 0.7188rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.325rem, 4vw, 3.625rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 48px;
+  }
+  .section-title em { font-style: italic; color: var(--mid); }
+
+  /* ─── ABOUT ─── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .about-image-wrap {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+  .about-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 20px -20px -20px 20px;
+    border: 1px solid var(--accent-light);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .about-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.8s ease;
+  }
+  .about-image-wrap:hover img { transform: scale(1.03); }
+
+  .about-body p {
+    font-size: 1.0625rem;
+    line-height: 1.9;
+    color: var(--mid);
+    margin-bottom: 24px;
+  }
+  .about-body p strong {
+    color: var(--black);
+    font-weight: 500;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: var(--black);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7313rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-top: 6px;
+  }
+
+  /* ─── AWARDS RIBBON ─── */
+  #awards-ribbon {
+    background: var(--black);
+    padding: 50px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .ribbon-track {
+    display: flex;
+    gap: 80px;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .ribbon-item {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .ribbon-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .ribbon-text {
+    font-size: 0.7188rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.6);
+  }
+  .ribbon-text strong {
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  /* ─── CONCERTS ─── */
+  #concerts { background: var(--cream); }
+  .concerts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .concert-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--charcoal);
+  }
+  .concert-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: brightness(1.0);
+  }
+  .concert-card:hover .concert-card-img {
+    transform: scale(1.07);
+    filter: brightness(0.35);
+  }
+  .concert-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+    transition: opacity 0.4s ease;
+  }
+  .concert-card:hover .concert-card-info { opacity: 0; }
+  .concert-venue {
+    font-size: 0.6188rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .concert-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+  .concert-hover {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    opacity: 0;
+    transition: opacity 0.4s;
+    text-align: center;
+  }
+  .concert-card:hover .concert-hover { opacity: 1; }
+  .concert-composers {
+    font-size: 0.7625rem;
+    letter-spacing: 0.15em;
+    color: var(--accent-light);
+    text-transform: uppercase;
+    line-height: 2;
+  }
+
+  /* ─── REPERTOIRE ─── */
+  #repertoire {
+    background: var(--charcoal);
+    color: var(--cream);
+  }
+  #repertoire .section-title { color: var(--cream); }
+  .rep-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .rep-item {
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(245,242,237,0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+    transition: background 0.3s;
+    padding-right: 60px;
+  }
+  .rep-item:nth-child(even) { padding-right: 0; padding-left: 60px; }
+  .rep-item:nth-child(odd) { border-right: 1px solid rgba(245,242,237,0.08); }
+  .rep-composer {
+    font-size: 0.6188rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .rep-work {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+  .rep-tag {
+    font-size: 0.6188rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+  }
+
+  /* ─── INSTAGRAM SECTION ─── */
+  #instagram {
+    background: var(--cream);
+    text-align: center;
+  }
+  .ig-intro {
+    max-width: 560px;
+    margin: 0 auto 64px;
+  }
+  .ig-intro p {
+    font-size: 0.9625rem;
+    line-height: 1.9;
+    color: var(--mid);
+  }
+  .ig-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    font-size: 0.7188rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 4px;
+    transition: color 0.3s;
+  }
+  .ig-handle:hover { color: var(--accent); }
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .ig-post {
+    aspect-ratio: 1;
+    background: var(--charcoal);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .ig-post-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: rgba(245,242,237,0.2);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    transition: all 0.4s;
+  }
+  /* Placeholder "fake" posts with gradient colors */
+  .ig-post:nth-child(1) .ig-post-inner { background: linear-gradient(135deg, #1a1a1a 0%, #2a2014 100%); }
+  .ig-post:nth-child(2) .ig-post-inner { background: linear-gradient(135deg, #0f1a14 0%, #1a2a1a 100%); }
+  .ig-post:nth-child(3) .ig-post-inner { background: linear-gradient(135deg, #1a1418 0%, #2a1a20 100%); }
+  .ig-post:nth-child(4) .ig-post-inner { background: linear-gradient(135deg, #14181a 0%, #1a2028 100%); }
+  .ig-post:hover .ig-post-inner { background: var(--black); color: var(--accent); }
+  .ig-featured {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .ig-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .ig-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+  .ig-card-bg {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .ig-card-icon {
+    font-size: 2rem;
+    color: rgba(200,169,110,0.4);
+    transition: color 0.3s, transform 0.3s;
+  }
+  .ig-card:hover .ig-card-icon { color: var(--accent); transform: scale(1.2); }
+  .ig-card-label {
+    padding: 16px 20px;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ig-card-tag {
+    font-size: 0.5625rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .ig-card-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: rgba(245,242,237,0.75);
+    line-height: 1.3;
+  }
+  .ig-block-label {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .ig-block-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--black);
+  }
+  .ig-block-sub {
+    font-size: 0.6563rem;
+    letter-spacing: 0.15em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+  .ig-video-bg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ig-play-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(200,169,110,0.12);
+    border: 1px solid rgba(200,169,110,0.3);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .ig-card:hover .ig-play-btn {
+    background: rgba(200,169,110,0.25);
+    transform: scale(1.1);
+  }
+  .ig-yt-badge, .ig-ig-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 0.5625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+  }
+  .ig-div-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .ig-div-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 28px;
+    background: var(--black);
+    text-decoration: none;
+    transition: background 0.3s;
+    border: 1px solid rgba(200,169,110,0.06);
+  }
+  .ig-div-card:hover { background: #1a1a1a; }
+  .ig-div-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(200,169,110,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ig-div-text {
+    flex: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(245,242,237,0.7);
+  }
+  .ig-div-arrow {
+    color: var(--accent);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .ig-div-card:hover .ig-div-arrow { opacity: 1; transform: translateX(0); }
+  .ig-cta {
+    margin-top: 48px;
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    border: 1px solid var(--black);
+    font-size: 0.6563rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover {
+    background: var(--black);
+    color: var(--cream);
+  }
+  .btn-filled {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 48px;
+    background: var(--black);
+    font-size: 0.6563rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-filled:hover { background: var(--accent); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--black);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  #contact .section-title { color: var(--cream); margin-bottom: 32px; }
+  .contact-desc {
+    font-size: 0.9625rem;
+    line-height: 1.9;
+    color: rgba(245,242,237,0.55);
+    margin-bottom: 48px;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(245,242,237,0.06);
+    transition: border-color 0.3s;
+  }
+  .contact-link:hover { border-color: var(--accent); }
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(245,242,237,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .contact-link:hover .contact-link-icon {
+    border-color: var(--accent);
+    background: rgba(200,169,110,0.1);
+  }
+  .contact-link-icon svg {
+    width: 14px; height: 14px;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+  .contact-link-text {}
+  .contact-link-label {
+    font-size: 0.6188rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .contact-link-value {
+    font-size: 0.9125rem;
+    color: rgba(245,242,237,0.75);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  .contact-form-area { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label {
+    font-size: 0.6188rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .form-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(245,242,237,0.12);
+    padding: 14px 0;
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9125rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+  .form-input:focus { border-color: var(--accent); }
+  .form-input::placeholder { color: rgba(245,242,237,0.2); }
+  textarea.form-input { resize: none; height: 120px; }
+  .form-submit {
+    margin-top: 16px;
+    align-self: flex-start;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(245,242,237,0.06);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.0625rem;
+    color: rgba(245,242,237,0.4);
+    font-style: italic;
+  }
+  .footer-copy {
+    font-size: 0.6438rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,242,237,0.2);
+    text-transform: uppercase;
+  }
+  .footer-social {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-social a {
+    font-size: 0.6438rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.3);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-social a:hover { color: var(--accent); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 22px 28px; }
+    nav.scrolled { padding: 16px 28px; }
+    .nav-links { display: none; }
+    section { padding: 80px 28px; }
+    #hero { }
+    .hero-content { padding: 0 28px 60px; flex-direction: column; align-items: flex-start; gap: 40px; }
+    #about { grid-template-columns: 1fr; gap: 48px; }
+    .about-image-wrap { aspect-ratio: 4/3; }
+    .about-image-wrap::after { display: none; }
+    .concerts-grid { grid-template-columns: 1fr; }
+    .concert-card { aspect-ratio: 3/4; max-height: 500px; }
+    .ig-featured { grid-template-columns: 1fr; }
+    .ig-div-grid { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; gap: 60px; }
+    .rep-list { grid-template-columns: 1fr; }
+    .rep-item:nth-child(even) { padding-left: 0; }
+    .rep-item:nth-child(odd) { border-right: none; padding-right: 0; }
+    .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    #contact { grid-template-columns: 1fr; gap: 60px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 28px; }
+  }
+
+  /* ─── SCROLL REVEALS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo"><!-- Generator: Adobe Illustrator 27.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 421.75 175.51" style="height:1.65rem;width:auto;display:block;" xml:space="preserve">
+<style type="text/css">.st0,.st1,.st2,.st3,.st4{fill:#E8D5B0;}</style>
+<g>
+	
+		<rect x="-62.97" y="67.47" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 112.54 62.97)" class="st0" width="175.51" height="40.58"/>
+	
+		<rect x="17.97" y="67.47" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 193.48 -17.97)" class="st1" width="175.51" height="40.58"/>
+	
+		<rect x="139.71" y="67.47" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 315.22 -139.71)" class="st2" width="175.51" height="40.58"/>
+	
+		<rect x="220.86" y="67.47" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 396.37 -220.86)" class="st3" width="175.51" height="40.58"/>
+	
+		<rect x="301.01" y="67.47" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 476.52 -301.01)" class="st4" width="175.51" height="40.58"/>
+</g>
+</svg>
+</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav_perfil">Perfil</a></li>
+    <li><a href="#concerts" data-i18n="nav_conciertos">Conciertos</a></li>
+    <li><a href="#repertoire" data-i18n="nav_repertorio">Repertorio</a></li>
+    <li><a href="#instagram">Instagram</a></li>
+    <li><a href="#contact" data-i18n="nav_contacto">Contacto</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+            <h1 class="hero-name">
+        Lukas Garrido
+        <em>Hinrichsen</em>
+      </h1>
+      <p class="hero-sub" style="color: var(--accent); font-size: 0.8rem; letter-spacing: 0.35em;" data-i18n="hero_sub">Pianista</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS RIBBON -->
+<div id="awards-ribbon">
+  <div class="ribbon-track">
+    <div class="ribbon-item">
+      <div class="ribbon-dot"></div>
+      <span class="ribbon-text" data-i18n="ribbon1"><strong>Beca de Honor 2023–2025</strong> · Corporación Amigos del Teatro Municipal de Santiago</span>
+    </div>
+    <div class="ribbon-item">
+      <div class="ribbon-dot"></div>
+      <span class="ribbon-text" data-i18n="ribbon2"><strong>2° Lugar, Concurso 2019</strong> · Asociación Latinoamericana de Profesores de Piano ALAPP</span>
+    </div>
+    <div class="ribbon-item">
+      <div class="ribbon-dot"></div>
+      <span class="ribbon-text" data-i18n="ribbon3"><strong>Pianista PUC</strong> · Instituto de Música, Pontificia Universidad Católica de Chile</span>
+    </div>
+    <div class="ribbon-item">
+      <div class="ribbon-dot"></div>
+      <span class="ribbon-text" data-i18n="ribbon1"><strong>Beca de Honor 2023–2025</strong> · Corporación Amigos del Teatro Municipal de Santiago</span>
+    </div>
+    <div class="ribbon-item">
+      <div class="ribbon-dot"></div>
+      <span class="ribbon-text" data-i18n="ribbon2"><strong>2° Lugar, Concurso 2019</strong> · Asociación Latinoamericana de Profesores de Piano ALAPP</span>
+    </div>
+    <div class="ribbon-item">
+      <div class="ribbon-dot"></div>
+      <span class="ribbon-text" data-i18n="ribbon3"><strong>Pianista PUC</strong> · Instituto de Música, Pontificia Universidad Católica de Chile</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image-wrap reveal">
+    <img src="img/Perfil.jpg" 
+         alt="Lukas Garrido Hinrichsen" style="object-position: center top;">
+  </div>
+  <div class="about-body">
+    <p class="section-label reveal" data-i18n="about_label">Perfil del Artista</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      <span data-i18n="about_title1">Una nueva generación</span><br>
+      <em data-i18n="about_title2">de intérpretes</em>
+    </h2>
+    <p class="reveal reveal-delay-2">
+      <span data-i18n="about_p1">Representante de una nueva generación de intérpretes, Lukas ha centrado su carrera en el abordaje de obras de <strong>altísima complejidad técnica e interpretativa</strong>, distinguiéndose por una combinación inusual de virtuosismo, precisión extrema y profundidad musical.</span>
+    </p>
+    <p class="reveal reveal-delay-3">
+      <span data-i18n="about_p2">Pianista titulado del Instituto de Música de la <strong>Pontificia Universidad Católica de Chile</strong>, ha recibido la Beca de Honor de la Corporación Amigos del Teatro Municipal de Santiago en tres años consecutivos (2023–2025), en reconocimiento a su proyección como solista nacional e internacional.</span>
+    </p>
+    <p class="reveal reveal-delay-3">
+      <span data-i18n="about_p3">Su propuesta artística busca no solo desafiar los límites del intérprete, sino también renovar la experiencia del público especializado, con programas que incluyen obras prácticamente ausentes de los escenarios chilenos.</span>
+    </p>
+    <div class="about-stats reveal reveal-delay-4">
+      <div class="stat-item">
+        <div class="stat-number">3×</div>
+        <div class="stat-label" data-i18n="stat1">Beca de Honor ATM</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6+</div>
+        <div class="stat-label" data-i18n="stat2">Conciertos recientes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2°</div>
+        <div class="stat-label" data-i18n="stat3">Lugar Concurso ALAPP 2019</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">PUC</div>
+        <div class="stat-label" data-i18n="stat4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCERTS -->
+<section id="concerts" style="padding-left:0;padding-right:0;padding-top:80px;padding-bottom:80px;">
+  <div style="padding: 0 60px 60px;">
+    <p class="section-label reveal" data-i18n="concerts_label">Trayectoria</p>
+    <h2 class="section-title reveal reveal-delay-1"><span data-i18n="concerts_title">Conciertos</span> <em data-i18n="concerts_em">recientes</em></h2>
+  </div>
+  <div class="concerts-grid">
+    <div class="concert-card reveal reveal-delay-1">
+      <img class="concert-card-img" 
+           src="img/Afiche - TMLF.png" 
+           alt="Teatro Municipal La Florida">
+    </div>
+    <div class="concert-card reveal">
+      <img class="concert-card-img" 
+           src="img/Afiche_Palacio.png" 
+           alt="Palacio Cousiño">
+    </div>
+    <div class="concert-card reveal reveal-delay-3">
+      <img class="concert-card-img" 
+           src="img/Afiche Patricia Ready.png" 
+           alt="Galería Patricia Ready">
+    </div>
+    <div class="concert-card reveal reveal-delay-3">
+      <img class="concert-card-img" 
+           src="img/Afiche_UAustral.png" 
+           alt="Universidad Austral de Chile">
+    </div>
+  </div>
+</section>
+
+<!-- REPERTOIRE -->
+<section id="repertoire">
+  <p class="section-label reveal" data-i18n="rep_label">Repertorio</p>
+  <h2 class="section-title reveal reveal-delay-1"><span data-i18n="rep_title">Obras</span> <em data-i18n="rep_em">destacadas</em></h2>
+  <div class="rep-list">
+    <div class="rep-item reveal">
+      <div>
+        <div class="rep-composer">Prokofiev</div>
+        <div class="rep-work">Toccata Op. 11</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_virt">Virtuosismo</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-1">
+      <div>
+        <div class="rep-composer">Balakirev</div>
+        <div class="rep-work">Islamey</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_dif">Dificultad extrema</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-2">
+      <div>
+        <div class="rep-composer">Chopin</div>
+        <div class="rep-work">Polonesa-Fantasía Op. 61</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_rom">Romanticismo</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-2">
+      <div>
+        <div class="rep-composer">Beethoven</div>
+        <div class="rep-work">Sonata No. 4 Op. 7</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_clas">Clasicismo</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-3">
+      <div>
+        <div class="rep-composer">Granados</div>
+        <div class="rep-work">Danza Ritual del Fuego</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_nac">Nacionalismo</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-3">
+      <div>
+        <div class="rep-composer">Liszt</div>
+        <div class="rep-work">Les Jeux d'eaux à la Villa d'Este</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_virt">Virtuosismo</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-4">
+      <div>
+        <div class="rep-composer">Cárcamo Salazar</div>
+        <div class="rep-work">Miniaturas</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_chi">Música chilena</div>
+    </div>
+    <div class="rep-item reveal reveal-delay-4">
+      <div>
+        <div class="rep-composer">Say</div>
+        <div class="rep-work">Black Earth</div>
+      </div>
+      <div class="rep-tag" data-i18n="tag_cont">Contemporáneo</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram">
+  <div class="ig-intro reveal">
+    <p class="section-label">@lukasgarrich</p>
+    <h2 class="section-title"><span data-i18n="ig_title">Intérprete</span><br><em data-i18n="ig_em">y divulgador</em></h2>
+    <p data-i18n="ig_desc">Lukas comparte su arte en dos dimensiones: interpretaciones de obras que desafían los límites del piano, y una labor de divulgación que acerca la música clásica a nuevas audiencias.</p>
+    <a href="https://www.instagram.com/lukasgarrich" target="_blank" class="ig-handle">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle>
+      </svg>
+      <span data-i18n="ig_follow">Seguir en Instagram</span>
+    </a>
+  </div>
+
+  <!-- Videos block -->
+  <div class="ig-block-label reveal">
+    <span class="ig-block-title" data-i18n="ig_stage">En el escenario</span>
+  </div>
+  <div class="ig-featured reveal reveal-delay-1">
+    <a href="https://youtu.be/6_on9pu-aL0" target="_blank" class="ig-card">
+      <div class="ig-card-bg ig-video-bg" style="background-image: url('img/toccata.jpg'); background-size: cover; background-position: center;">
+        <div class="ig-play-btn">
+          <svg viewBox="0 0 24 24" fill="var(--accent)" width="32" height="32"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="ig-yt-badge">YouTube</div>
+      </div>
+      <div class="ig-card-label">
+        <span class="ig-card-tag">Prokofiev</span>
+        <span class="ig-card-desc">Toccata Op. 11</span>
+      </div>
+    </a>
+    <a href="https://youtu.be/9g-dUjWidso" target="_blank" class="ig-card">
+      <div class="ig-card-bg ig-video-bg" style="background-image: url('img/islamei.jpg'); background-size: cover; background-position: center;">
+        <div class="ig-play-btn">
+          <svg viewBox="0 0 24 24" fill="var(--accent)" width="32" height="32"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="ig-yt-badge">YouTube</div>
+      </div>
+      <div class="ig-card-label">
+        <span class="ig-card-tag">Balakirev</span>
+        <span class="ig-card-desc">Islamey</span>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/p/DORE5c6EVc2/" target="_blank" class="ig-card">
+      <div class="ig-card-bg ig-video-bg" style="background-image: url('img/pagan.jpg'); background-size: cover; background-position: center;">
+        <div class="ig-play-btn">
+          <svg viewBox="0 0 24 24" fill="var(--accent)" width="32" height="32"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="ig-ig-badge">Instagram</div>
+      </div>
+      <div class="ig-card-label">
+        <span class="ig-card-tag">Björk</span>
+        <span class="ig-card-desc">Pagan Poetry</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Divulgación block -->
+  <div class="ig-block-label reveal" style="margin-top: 72px;">
+    <span class="ig-block-title" data-i18n="ig_div">Divulgación musical</span>
+    <span class="ig-block-sub" data-i18n="ig_div_sub">Reflexiones, contexto e historias detrás de la música clásica</span>
+  </div>
+  <div class="ig-div-grid reveal reveal-delay-1">
+    <a href="https://www.instagram.com/p/DNTSQmtxL0_/" target="_blank" class="ig-div-card">
+      <div class="ig-div-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" width="20" height="20"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="ig-div-text" data-i18n="ig_post1">Memoria Musical</div>
+      <div class="ig-div-arrow">→</div>
+    </a>
+    <a href="https://www.instagram.com/p/DMvOfecsUP8/" target="_blank" class="ig-div-card">
+      <div class="ig-div-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" width="20" height="20"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="ig-div-text" data-i18n="ig_post2">Tocar no es lo mismo que interpretar</div>
+      <div class="ig-div-arrow">→</div>
+    </a>
+    <a href="https://www.instagram.com/p/DN3UVni4oFP/" target="_blank" class="ig-div-card">
+      <div class="ig-div-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" width="20" height="20"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="ig-div-text" data-i18n="ig_post3">Ser buen intérprete no te hace buen profesor</div>
+      <div class="ig-div-arrow">→</div>
+    </a>
+    <a href="https://www.instagram.com/p/DWjQlASDRoc/" target="_blank" class="ig-div-card">
+      <div class="ig-div-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" width="20" height="20"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="ig-div-text" data-i18n="ig_post4">Prokofiev en 2 minutos</div>
+      <div class="ig-div-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="ig-cta reveal reveal-delay-2">
+    <a href="https://www.instagram.com/lukasgarrich" target="_blank" class="btn-outline">
+      <span data-i18n="ig_cta">Ver todas las publicaciones</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <p class="section-label reveal" data-i18n="contact_label">Contáctame</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      <span data-i18n="contact_title">Trabajemos</span><br>
+      <em data-i18n="contact_em">juntos</em>
+    </h2>
+    <p class="contact-desc reveal reveal-delay-2">
+      <span data-i18n="contact_desc">Para consultas sobre conciertos, colaboraciones, clases magistrales o cualquier propuesta artística, no dudes en escribirme.</span>
+    </p>
+    <div class="contact-links">
+      <a href="mailto:lukasgarrich@gmail.com" class="contact-link reveal reveal-delay-3">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <div class="contact-link-label" data-i18n="lbl_email">Email</div>
+          <div class="contact-link-value">lukasgarrich@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/lukasgarrich" target="_blank" class="contact-link reveal reveal-delay-3">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <div class="contact-link-label">Instagram</div>
+          <div class="contact-link-value">@lukasgarrich</div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@lukasgarrich" target="_blank" class="contact-link reveal reveal-delay-4">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <div class="contact-link-label">YouTube</div>
+          <div class="contact-link-value">@lukasgarrich</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/lukasgarrich" target="_blank" class="contact-link reveal reveal-delay-4">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">lukasgarrich</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="contact-form-area reveal reveal-delay-2">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--accent);margin-bottom:8px;font-style:italic;" data-i18n="contact_form_title">Envíame un mensaje</h3>
+    <div class="form-group">
+      <label class="form-label" data-i18n="form_nombre">Nombre</label>
+      <input type="text" class="form-input" data-i18n-placeholder="ph_nombre" placeholder="Tu nombre">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" placeholder="tu@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="form_asunto">Asunto</label>
+      <input type="text" class="form-input" data-i18n-placeholder="ph_asunto" placeholder="Concierto, Clases, Colaboración...">
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="form_mensaje">Mensaje</label>
+      <textarea class="form-input" data-i18n-placeholder="ph_mensaje" placeholder="Cuéntame tu propuesta..."></textarea>
+    </div>
+    <div class="form-submit">
+      <a href="mailto:lukasgarrich@gmail.com" class="btn-filled" data-i18n="btn_enviar">Enviar mensaje</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lukas Garrido Hinrichsen</div>
+  <div class="footer-copy">© 2026 · lukasgarrich.cl</div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/lukasgarrich" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@lukasgarrich" target="_blank">YouTube</a>
+    <a href="https://www.linkedin.com/in/lukasgarrich" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+<script>
+const translations = {
+  es: {
+    nav_perfil: 'Perfil',
+    nav_conciertos: 'Conciertos',
+    nav_repertorio: 'Repertorio',
+    nav_contacto: 'Contacto',
+    hero_sub: 'Pianista',
+    about_label: 'Perfil del Artista',
+    about_title1: 'Una nueva generación',
+    about_title2: 'de intérpretes',
+    about_p1: 'Representante de una nueva generación de intérpretes, Lukas ha centrado su carrera en el abordaje de obras de <strong>altísima complejidad técnica e interpretativa</strong>, distinguiéndose por una combinación inusual de virtuosismo, precisión extrema y profundidad musical.',
+    about_p2: 'Pianista titulado del Instituto de Música de la <strong>Pontificia Universidad Católica de Chile</strong>, ha recibido la Beca de Honor de la Corporación Amigos del Teatro Municipal de Santiago en tres años consecutivos (2023–2025), en reconocimiento a su proyección como solista nacional e internacional.',
+    about_p3: 'Su propuesta artística busca no solo desafiar los límites del intérprete, sino también renovar la experiencia del público especializado, con programas que incluyen obras prácticamente ausentes de los escenarios chilenos.',
+    stat1: 'Beca de Honor ATM',
+    stat2: 'Conciertos recientes',
+    stat3: 'Lugar Concurso ALAPP 2019',
+    stat4: '',
+    concerts_label: 'Trayectoria',
+    concerts_title: 'Conciertos',
+    concerts_em: 'recientes',
+    rep_label: 'Repertorio',
+    rep_title: 'Obras',
+    rep_em: 'destacadas',
+    tag_virt: 'Virtuosismo',
+    tag_dif: 'Dificultad extrema',
+    tag_rom: 'Romanticismo',
+    tag_clas: 'Clasicismo',
+    tag_nac: 'Nacionalismo',
+    tag_chi: 'Música chilena',
+    tag_cont: 'Contemporáneo',
+    ig_title: 'Intérprete',
+    ig_em: 'y divulgador',
+    ig_desc: 'Lukas comparte su arte en dos dimensiones: interpretaciones de obras que desafían los límites del piano, y una labor de divulgación que acerca la música clásica a nuevas audiencias.',
+    ig_follow: 'Seguir en Instagram',
+    ig_stage: 'En el escenario',
+    ig_div: 'Divulgación musical',
+    ig_div_sub: 'Reflexiones, contexto e historias detrás de la música clásica',
+    ig_post1: 'Memoria Musical',
+    ig_post2: 'Tocar no es lo mismo que interpretar',
+    ig_post3: 'Ser buen intérprete no te hace buen profesor',
+    ig_post4: 'Prokofiev en 2 minutos',
+    ig_cta: 'Ver todas las publicaciones',
+    contact_label: 'Contáctame',
+    contact_title: 'Trabajemos',
+    contact_em: 'juntos',
+    contact_desc: 'Para consultas sobre conciertos, colaboraciones, clases magistrales o cualquier propuesta artística, no dudes en escribirme.',
+    contact_form_title: 'Envíame un mensaje',
+    form_nombre: 'Nombre',
+    form_asunto: 'Asunto',
+    form_mensaje: 'Mensaje',
+    lbl_email: 'Email',
+    ph_nombre: 'Tu nombre',
+    ph_asunto: 'Concierto, Clases, Colaboración...',
+    ph_mensaje: 'Cuéntame tu propuesta...',
+    btn_enviar: 'Enviar mensaje',
+    ribbon1: '<strong>Beca de Honor 2023–2025</strong> · Corporación Amigos del Teatro Municipal de Santiago',
+    ribbon2: '<strong>2° Lugar, Concurso 2019</strong> · Asociación Latinoamericana de Profesores de Piano ALAPP',
+    ribbon3: '<strong>Pianista PUC</strong> · Instituto de Música, Pontificia Universidad Católica de Chile',
+  },
+  en: {
+    nav_perfil: 'Profile',
+    nav_conciertos: 'Concerts',
+    nav_repertorio: 'Repertoire',
+    nav_contacto: 'Contact',
+    hero_sub: 'Pianist',
+    about_label: 'Artist Profile',
+    about_title1: 'A new generation',
+    about_title2: 'of performers',
+    about_p1: 'Representative of a new generation of performers, Lukas has built his career around works of <strong>extraordinary technical and interpretive complexity</strong>, distinguished by an unusual combination of virtuosity, extreme precision, and musical depth.',
+    about_p2: 'A graduate pianist from the School of Music at the <strong>Pontificia Universidad Católica de Chile</strong>, he has received the Honor Scholarship from the Corporación Amigos del Teatro Municipal de Santiago for three consecutive years (2023–2025), in recognition of his projection as a national and international soloist.',
+    about_p3: 'His artistic vision seeks not only to push the boundaries of performance, but also to renew the experience of specialized audiences, with programs featuring works practically absent from Chilean stages.',
+    stat1: 'ATM Honor Scholarship',
+    stat2: 'Recent concerts',
+    stat3: 'ALAPP Competition 2019',
+    stat4: '',
+    concerts_label: 'Career',
+    concerts_title: 'Recent',
+    concerts_em: 'concerts',
+    rep_label: 'Repertoire',
+    rep_title: 'Featured',
+    rep_em: 'works',
+    tag_virt: 'Virtuosity',
+    tag_dif: 'Extreme difficulty',
+    tag_rom: 'Romanticism',
+    tag_clas: 'Classicism',
+    tag_nac: 'Nationalism',
+    tag_chi: 'Chilean music',
+    tag_cont: 'Contemporary',
+    ig_title: 'Performer',
+    ig_em: 'and educator',
+    ig_desc: 'Lukas shares his art in two dimensions: performances of works that push the limits of the piano, and an educational mission that brings classical music to new audiences.',
+    ig_follow: 'Follow on Instagram',
+    ig_stage: 'On stage',
+    ig_div: 'Musical outreach',
+    ig_div_sub: 'Reflections, context and stories behind classical music',
+    ig_post1: 'Musical Memory',
+    ig_post2: 'Playing is not the same as interpreting',
+    ig_post3: 'Being a great performer doesn\'t make you a great teacher',
+    ig_post4: 'Prokofiev in 2 minutes',
+    ig_cta: 'View all posts',
+    contact_label: 'Contact me',
+    contact_title: 'Let\'s work',
+    contact_em: 'together',
+    contact_desc: 'For inquiries about concerts, collaborations, masterclasses or any artistic proposal, feel free to write to me.',
+    contact_form_title: 'Send me a message',
+    form_nombre: 'Name',
+    form_asunto: 'Subject',
+    form_mensaje: 'Message',
+    lbl_email: 'Email',
+    ph_nombre: 'Your name',
+    ph_asunto: 'Concert, Classes, Collaboration...',
+    ph_mensaje: 'Tell me about your proposal...',
+    btn_enviar: 'Send message',
+    ribbon1: '<strong>Honor Scholarship 2023–2025</strong> · Corporación Amigos del Teatro Municipal de Santiago',
+    ribbon2: '<strong>2nd Place, Competition 2019</strong> · Latin American Association of Piano Teachers ALAPP',
+    ribbon3: '<strong>PUC Pianist</strong> · School of Music, Pontificia Universidad Católica de Chile',
+  },
+  it: {
+    nav_perfil: 'Profilo',
+    nav_conciertos: 'Concerti',
+    nav_repertorio: 'Repertorio',
+    nav_contacto: 'Contatti',
+    hero_sub: 'Pianista',
+    about_label: 'Profilo dell\'Artista',
+    about_title1: 'Una nuova generazione',
+    about_title2: 'di interpreti',
+    about_p1: 'Rappresentante di una nuova generazione di interpreti, Lukas ha incentrato la sua carriera sull\'esecuzione di opere di <strong>elevatissima complessità tecnica e interpretativa</strong>, distinguendosi per un\'insolita combinazione di virtuosismo, precisione estrema e profondità musicale.',
+    about_p2: 'Pianista laureato presso l\'Istituto di Musica della <strong>Pontificia Universidad Católica de Chile</strong>, ha ricevuto la Borsa d\'Onore della Corporación Amigos del Teatro Municipal de Santiago per tre anni consecutivi (2023–2025), in riconoscimento della sua proiezione come solista nazionale e internazionale.',
+    about_p3: 'La sua proposta artistica mira non solo a sfidare i limiti dell\'interprete, ma anche a rinnovare l\'esperienza del pubblico specializzato, con programmi che includono opere praticamente assenti dalle scene cilene.',
+    stat1: 'Borsa d\'Onore ATM',
+    stat2: 'Concerti recenti',
+    stat3: 'Concorso ALAPP 2019',
+    stat4: '',
+    concerts_label: 'Percorso',
+    concerts_title: 'Concerti',
+    concerts_em: 'recenti',
+    rep_label: 'Repertorio',
+    rep_title: 'Opere',
+    rep_em: 'in evidenza',
+    tag_virt: 'Virtuosismo',
+    tag_dif: 'Difficoltà estrema',
+    tag_rom: 'Romanticismo',
+    tag_clas: 'Classicismo',
+    tag_nac: 'Nazionalismo',
+    tag_chi: 'Musica cilena',
+    tag_cont: 'Contemporaneo',
+    ig_title: 'Interprete',
+    ig_em: 'e divulgatore',
+    ig_desc: 'Lukas condivide la sua arte in due dimensioni: esecuzioni di opere che sfidano i limiti del pianoforte e un\'attività di divulgazione che avvicina la musica classica a nuovi pubblici.',
+    ig_follow: 'Segui su Instagram',
+    ig_stage: 'Sul palco',
+    ig_div: 'Divulgazione musicale',
+    ig_div_sub: 'Riflessioni, contesto e storie dietro la musica classica',
+    ig_post1: 'Memoria Musicale',
+    ig_post2: 'Suonare non è lo stesso che interpretare',
+    ig_post3: 'Essere un grande interprete non ti rende un grande insegnante',
+    ig_post4: 'Prokofiev in 2 minuti',
+    ig_cta: 'Vedi tutte le pubblicazioni',
+    contact_label: 'Contattami',
+    contact_title: 'Lavoriamo',
+    contact_em: 'insieme',
+    contact_desc: 'Per richieste riguardanti concerti, collaborazioni, masterclass o qualsiasi proposta artistica, non esitare a scrivermi.',
+    contact_form_title: 'Inviami un messaggio',
+    form_nombre: 'Nome',
+    form_asunto: 'Oggetto',
+    form_mensaje: 'Messaggio',
+    lbl_email: 'Email',
+    ph_nombre: 'Il tuo nome',
+    ph_asunto: 'Concerto, Lezioni, Collaborazione...',
+    ph_mensaje: 'Raccontami la tua proposta...',
+    btn_enviar: 'Invia messaggio',
+    ribbon1: '<strong>Borsa d\'Onore 2023–2025</strong> · Corporación Amigos del Teatro Municipal de Santiago',
+    ribbon2: '<strong>2° Posto, Concorso 2019</strong> · Associazione Latinoamericana di Insegnanti di Pianoforte ALAPP',
+    ribbon3: '<strong>Pianista PUC</strong> · Istituto di Musica, Pontificia Universidad Católica de Chile',
+  }
+};
+
+function setLang(lang) {
+  // Actualizar botones
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  const t = translations[lang];
+
+  // Traducir elementos con data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Traducir placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  // Guardar preferencia
+  localStorage.setItem('lang', lang);
+}
+
+// Inicializar con idioma guardado o español
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('lang') || 'es';
+  setLang(saved);
+});
+</script>
+
+</body>
+</html>
