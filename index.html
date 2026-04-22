@@ -1233,25 +1233,39 @@
   </div>
   <div class="contact-form-area reveal reveal-delay-2">
     <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--accent);margin-bottom:8px;font-style:italic;" data-i18n="contact_form_title">Envíame un mensaje</h3>
-    <div class="form-group">
-      <label class="form-label" data-i18n="form_nombre">Nombre</label>
-      <input type="text" class="form-input" data-i18n-placeholder="ph_nombre" placeholder="Tu nombre">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-input" placeholder="tu@email.com">
-    </div>
-    <div class="form-group">
-      <label class="form-label" data-i18n="form_asunto">Asunto</label>
-      <input type="text" class="form-input" data-i18n-placeholder="ph_asunto" placeholder="Concierto, Clases, Colaboración...">
-    </div>
-    <div class="form-group">
-      <label class="form-label" data-i18n="form_mensaje">Mensaje</label>
-      <textarea class="form-input" data-i18n-placeholder="ph_mensaje" placeholder="Cuéntame tu propuesta..."></textarea>
-    </div>
-    <div class="form-submit">
-      <a href="mailto:lukasgarrich@gmail.com" class="btn-filled" data-i18n="btn_enviar">Enviar mensaje</a>
-    </div>
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3dad7e5f-66ae-441a-a428-2c74a5b0a231">
+      <input type="hidden" name="subject" value="Nuevo mensaje desde lukasgarrich.github.io">
+      <input type="hidden" name="from_name" value="Web Lukas Garrido">
+      <input type="checkbox" name="botcheck" style="display:none;">
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_nombre">Nombre</label>
+        <input type="text" name="name" class="form-input" data-i18n-placeholder="ph_nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-input" placeholder="tu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_asunto">Asunto</label>
+        <input type="text" name="subject_detail" class="form-input" data-i18n-placeholder="ph_asunto" placeholder="Concierto, Clases, Colaboración...">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_mensaje">Mensaje</label>
+        <textarea name="message" class="form-input" data-i18n-placeholder="ph_mensaje" placeholder="Cuéntame tu propuesta..." required></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn-filled" id="submit-btn">
+          <span data-i18n="btn_enviar">Enviar mensaje</span>
+        </button>
+      </div>
+      <div id="form-success" style="display:none;margin-top:16px;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);">
+        ✓ Mensaje enviado correctamente
+      </div>
+      <div id="form-error" style="display:none;margin-top:16px;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:#c0392b;">
+        × Error al enviar. Intenta de nuevo.
+      </div>
+    </form>
   </div>
 </section>
 
@@ -1267,6 +1281,38 @@
 </footer>
 
 <script>
+  // Web3Forms handler
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const success = document.getElementById('form-success');
+      const error = document.getElementById('form-error');
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      success.style.display = 'none';
+      error.style.display = 'none';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(contactForm)
+        });
+        const data = await res.json();
+        if (data.success) {
+          success.style.display = 'block';
+          contactForm.reset();
+        } else {
+          error.style.display = 'block';
+        }
+      } catch {
+        error.style.display = 'block';
+      }
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    });
+  }
+
   // Nav scroll behavior
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
